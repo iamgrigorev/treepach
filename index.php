@@ -25,32 +25,30 @@ session_start();
 
 		  if (is_array($proFile)){
 				$lastK=count($proFile)-1;
-				// echo $lastK.'номер последней строки'."<br>";
+				
 		    foreach ($proFile as $key => $value) {
-					// echo $ssid."<br>";
-					// echo $value."<br>";
-					// echo $key."строка<br>";
+
 
 		      if (strpos($value,$ssid)===false){
-						// echo "строка".$key."не подошла <br>";
+						// строка не подошла
 						if ($key==$lastK) {
 							$proFile[]=$ssid."✕".$_POST[color];
-							// echo "не встретил и добавил"."<br>";
+							// не встретил и добавил
 						}
 					}
 					else {
 							$proFile[$key]=substr_replace($value,"✕".$_POST[color],strlen($ssid));
-							// echo "совпало и заменил"."<br>";
+							// совпало и заменил
 							break;
 					}
 		    }
 		  }
 		 	else {
 				$proFile[]=$ssid."✕".$_POST[color];
-				// echo "массив был пуст добавим первую строку"."<br>";
+				// массив был пуст добавим первую строку
 			}
 			$wrFile=fopen($userFile,"w+");
-			// echo "выгрузили массив в файл"."<br>";
+			// выгрузили массив в файл
 			foreach ($proFile as $value) {
 				fwrite ($wrFile, str_replace("\n","",$value)."\n");
 			}
